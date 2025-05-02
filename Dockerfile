@@ -1,3 +1,4 @@
+# Imagen base
 FROM python:3.12-slim
 
 # Evita prompts durante instalación
@@ -6,23 +7,23 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Crear directorio de trabajo
 WORKDIR /app
 
-# Instala dependencias del sistema necesarias
+# Instalacioon dependencias sistema requeridas
 RUN apt-get update && apt-get install -y \
     build-essential \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copia e instala dependencias de Python
+# Copia,instala dependencias Python
 COPY app/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt --progress-bar off
 
 
-# Copia el código fuente
+# Copia código fuente
 COPY app ./app
 
-# Exponer el puerto de FastAPI
+# Expone puerto FastAPI
 EXPOSE 8000
 
-# Comando de inicio
+# Comando inicio
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

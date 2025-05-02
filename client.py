@@ -11,7 +11,7 @@ def get_similarity(text1, text2):
     return response.json()
 
 if __name__ == "__main__":
-    print("🔹 Obteniendo embedding para: 'Hola mundo'")
+    print("Obteniendo embedding para: 'Hola mundo'")
     embedding = get_embedding("Hola mundo")
     print("Embedding:", embedding)
 
